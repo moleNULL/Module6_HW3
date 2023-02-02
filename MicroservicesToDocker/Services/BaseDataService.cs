@@ -1,7 +1,7 @@
-using Catalog.Host.Services.Interfaces;
+using MicroservicesToDocker.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace Catalog.Host.Services;
+namespace MicroservicesToDocker.Services;
 
 public abstract class BaseDataService<T>
     where T : DbContext

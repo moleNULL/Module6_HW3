@@ -1,8 +1,8 @@
 using AutoMapper;
-using Catalog.Host.Data.Entities;
-using Catalog.Host.Models.Dtos;
+using MicroservicesToDocker.Data.Entities;
+using MicroservicesToDocker.Models.Dtos;
 
-namespace Catalog.Host.Mapping;
+namespace MicroservicesToDocker.Mapping;
 
 public class MappingProfile : Profile
 {

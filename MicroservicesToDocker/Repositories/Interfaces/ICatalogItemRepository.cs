@@ -1,7 +1,7 @@
-using Catalog.Host.Data;
-using Catalog.Host.Data.Entities;
+using MicroservicesToDocker.Data;
+using MicroservicesToDocker.Data.Entities;
 
-namespace Catalog.Host.Repositories.Interfaces;
+namespace MicroservicesToDocker.Repositories.Interfaces;
 
 public interface ICatalogItemRepository
 {

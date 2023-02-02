@@ -1,8 +1,8 @@
-using Catalog.Host.Services.Interfaces;
+using MicroservicesToDocker.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace Catalog.Host.Services;
+namespace MicroservicesToDocker.Services;
 
 public class DbContextWrapper<T> : IDbContextWrapper<T>
     where T : DbContext

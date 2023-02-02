@@ -1,4 +1,4 @@
-namespace Catalog.Host.Services.Interfaces;
+namespace MicroservicesToDocker.Services.Interfaces;
 
 public interface ICatalogItemService
 {

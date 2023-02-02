@@ -1,8 +1,8 @@
-using Catalog.Host.Data;
-using Catalog.Host.Repositories.Interfaces;
-using Catalog.Host.Services.Interfaces;
+using MicroservicesToDocker.Data;
+using MicroservicesToDocker.Repositories.Interfaces;
+using MicroservicesToDocker.Services.Interfaces;
 
-namespace Catalog.Host.Services;
+namespace MicroservicesToDocker.Services;
 
 public class CatalogItemService : BaseDataService<ApplicationDbContext>, ICatalogItemService
 {

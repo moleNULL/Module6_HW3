@@ -1,10 +1,10 @@
 using AutoMapper;
-using Catalog.Host.Configurations;
-using Catalog.Host.Data.Entities;
-using Catalog.Host.Models.Dtos;
+using MicroservicesToDocker.Configurations;
+using MicroservicesToDocker.Data.Entities;
+using MicroservicesToDocker.Models.Dtos;
 using Microsoft.Extensions.Options;
 
-namespace Catalog.Host.Mapping;
+namespace MicroservicesToDocker.Mapping;
 
 public class CatalogItemPictureResolver : IMemberValueResolver<CatalogItem, CatalogItemDto, string, object>
 {

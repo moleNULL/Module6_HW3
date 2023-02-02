@@ -1,12 +1,12 @@
 using AutoMapper;
-using Catalog.Host.Configurations;
-using Catalog.Host.Data;
-using Catalog.Host.Models.Dtos;
-using Catalog.Host.Models.Response;
-using Catalog.Host.Repositories.Interfaces;
-using Catalog.Host.Services.Interfaces;
+using MicroservicesToDocker.Configurations;
+using MicroservicesToDocker.Data;
+using MicroservicesToDocker.Models.Dtos;
+using MicroservicesToDocker.Models.Response;
+using MicroservicesToDocker.Repositories.Interfaces;
+using MicroservicesToDocker.Services.Interfaces;
 
-namespace Catalog.Host.Services;
+namespace MicroservicesToDocker.Services;
 
 public class CatalogService : BaseDataService<ApplicationDbContext>, ICatalogService
 {

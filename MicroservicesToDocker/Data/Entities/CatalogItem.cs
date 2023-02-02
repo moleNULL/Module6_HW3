@@ -1,6 +1,6 @@
 #pragma warning disable CS8618
 
-namespace Catalog.Host.Data.Entities;
+namespace MicroservicesToDocker.Data.Entities;
 
 public class CatalogItem
 {

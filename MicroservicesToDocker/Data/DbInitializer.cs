@@ -1,6 +1,6 @@
-using Catalog.Host.Data.Entities;
+using MicroservicesToDocker.Data.Entities;
 
-namespace Catalog.Host.Data;
+namespace MicroservicesToDocker.Data;
 
 public static class DbInitializer
 {

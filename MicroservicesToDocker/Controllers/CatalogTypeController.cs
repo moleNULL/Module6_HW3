@@ -1,7 +1,7 @@
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Catalog.Host.Controllers;
+namespace MicroservicesToDocker.Controllers;
 
 [ApiController]
 [Route(ComponentDefaults.DefaultRoute)]

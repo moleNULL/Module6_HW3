@@ -1,4 +1,4 @@
-namespace Catalog.Host.Data;
+namespace MicroservicesToDocker.Data;
 
 public class PaginatedItems<T>
 {

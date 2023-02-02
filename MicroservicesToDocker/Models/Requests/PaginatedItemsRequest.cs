@@ -1,4 +1,4 @@
-namespace Catalog.Host.Models.Requests;
+namespace MicroservicesToDocker.Models.Requests;
 
 public class PaginatedItemsRequest
 {

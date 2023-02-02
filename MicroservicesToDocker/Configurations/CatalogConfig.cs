@@ -1,5 +1,5 @@
 #pragma warning disable CS8618
-namespace Catalog.Host.Configurations;
+namespace MicroservicesToDocker.Configurations;
 
 public class CatalogConfig
 {

@@ -1,9 +1,9 @@
-using Catalog.Host.Data.Entities;
-using Catalog.Host.Models.Dtos;
+using MicroservicesToDocker.Data.Entities;
+using MicroservicesToDocker.Models.Dtos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Catalog.Host.Data.EntityConfigurations;
+namespace MicroservicesToDocker.Data.EntityConfigurations;
 
 public class CatalogTypeEntityTypeConfiguration
     : IEntityTypeConfiguration<CatalogType>

@@ -1,9 +1,9 @@
-using Catalog.Host.Configurations;
-using Catalog.Host.Data;
-using Catalog.Host.Repositories;
-using Catalog.Host.Repositories.Interfaces;
-using Catalog.Host.Services;
-using Catalog.Host.Services.Interfaces;
+using MicroservicesToDocker.Configurations;
+using MicroservicesToDocker.Data;
+using MicroservicesToDocker.Repositories;
+using MicroservicesToDocker.Repositories.Interfaces;
+using MicroservicesToDocker.Services;
+using MicroservicesToDocker.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var configuration = GetConfiguration();

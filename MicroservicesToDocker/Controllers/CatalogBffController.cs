@@ -1,13 +1,13 @@
 using System.Net;
-using Catalog.Host.Data.Entities;
-using Catalog.Host.Models.Dtos;
-using Catalog.Host.Models.Requests;
-using Catalog.Host.Models.Response;
-using Catalog.Host.Services.Interfaces;
+using MicroservicesToDocker.Data.Entities;
+using MicroservicesToDocker.Models.Dtos;
+using MicroservicesToDocker.Models.Requests;
+using MicroservicesToDocker.Models.Response;
+using MicroservicesToDocker.Services.Interfaces;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Catalog.Host.Controllers;
+namespace MicroservicesToDocker.Controllers;
 
 [ApiController]
 [Route(ComponentDefaults.DefaultRoute)]

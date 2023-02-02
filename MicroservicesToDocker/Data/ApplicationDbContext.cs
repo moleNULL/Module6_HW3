@@ -1,9 +1,9 @@
 #pragma warning disable CS8618
-using Catalog.Host.Data.Entities;
-using Catalog.Host.Data.EntityConfigurations;
+using MicroservicesToDocker.Data.Entities;
+using MicroservicesToDocker.Data.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
 
-namespace Catalog.Host.Data;
+namespace MicroservicesToDocker.Data;
 
 public class ApplicationDbContext : DbContext
 {

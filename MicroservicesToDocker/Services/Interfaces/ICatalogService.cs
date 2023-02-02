@@ -1,7 +1,7 @@
-using Catalog.Host.Models.Dtos;
-using Catalog.Host.Models.Response;
+using MicroservicesToDocker.Models.Dtos;
+using MicroservicesToDocker.Models.Response;
 
-namespace Catalog.Host.Services.Interfaces;
+namespace MicroservicesToDocker.Services.Interfaces;
 
 public interface ICatalogService
 {

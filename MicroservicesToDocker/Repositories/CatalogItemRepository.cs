@@ -1,10 +1,10 @@
-using Catalog.Host.Data;
-using Catalog.Host.Data.Entities;
-using Catalog.Host.Repositories.Interfaces;
-using Catalog.Host.Services.Interfaces;
+using MicroservicesToDocker.Data;
+using MicroservicesToDocker.Data.Entities;
+using MicroservicesToDocker.Repositories.Interfaces;
+using MicroservicesToDocker.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace Catalog.Host.Repositories;
+namespace MicroservicesToDocker.Repositories;
 
 public class CatalogItemRepository : ICatalogItemRepository
 {

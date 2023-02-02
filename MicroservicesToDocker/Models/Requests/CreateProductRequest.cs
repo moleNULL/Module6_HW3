@@ -1,6 +1,6 @@
-using Catalog.Host.Data.Entities;
+using MicroservicesToDocker.Data.Entities;
 
-namespace Catalog.Host.Models.Requests;
+namespace MicroservicesToDocker.Models.Requests;
 
 public class CreateProductRequest
 {

@@ -1,5 +1,5 @@
 #pragma warning disable CS8618
-namespace Catalog.Host.Models.Dtos;
+namespace MicroservicesToDocker.Models.Dtos;
 
 public class CatalogBrandDto
 {

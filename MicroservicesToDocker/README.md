@@ -14,10 +14,10 @@ docker-compose build --no-cache
 docker-compose up
 
 #Add-Migration
-dotnet ef --startup-project Catalog/Catalog.Host migrations add InitialMigration --project Catalog/Catalog.Host
+dotnet ef --startup-project MicroservicesToDocker migrations add InitialMigration --project MicroservicesToDocker
 
 #Update-Migration
-dotnet ef --startup-project Catalog/Catalog.Host database update InitialMigration --project Catalog/Catalog.Host
+dotnet ef --startup-project MicroservicesToDocker database update InitialMigration --project MicroservicesToDocker
 
 #Remove-Migration
-dotnet ef --startup-project Catalog/Catalog.Host migrations remove --project Catalog/Catalog.Host -f
+dotnet ef --startup-project MicroservicesToDocker migrations remove --project MicroservicesToDocker -f

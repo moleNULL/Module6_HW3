@@ -1,4 +1,4 @@
-namespace Catalog.Host.Models.Response;
+namespace MicroservicesToDocker.Models.Response;
 
 public class AddItemResponse<T>
 {
