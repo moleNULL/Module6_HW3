@@ -86,6 +86,20 @@ public class CatalogItemRepository : ICatalogItemRepository
         return items;
     }
 
+    public async Task<List<CatalogBrand>> GetBrandsAsync()
+    {
+        var brands = await _dbContext.CatalogBrands.ToListAsync();
+
+        return brands;
+    }
+
+    public async Task<List<CatalogType>> GetTypesAsync()
+    {
+        var types = await _dbContext.CatalogTypes.ToListAsync();
+
+        return types;
+    }
+
     public async Task<int?> Add(string name, string description, decimal price, int availableStock, int catalogBrandId, int catalogTypeId, string pictureFileName)
     {
         var item = await _dbContext.AddAsync(new CatalogItem

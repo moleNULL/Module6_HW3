@@ -9,4 +9,6 @@ public interface ICatalogService
     Task<CatalogItemDto?> GetItemById(int id);
     Task<List<CatalogItemDto>?> GetItemsByBrand(string brand);
     Task<List<CatalogItemDto>?> GetItemsByTypeAsync(string type);
+    Task<List<CatalogBrandDto>> GetBrandsAsync();
+    Task<List<CatalogTypeDto>> GetTypesAsync();
 }

@@ -1,5 +1,4 @@
 using System.Net;
-using MicroservicesToDocker.Data.Entities;
 using MicroservicesToDocker.Models.Dtos;
 using MicroservicesToDocker.Models.Requests;
 using MicroservicesToDocker.Models.Response;
@@ -14,14 +13,12 @@ namespace MicroservicesToDocker.Controllers;
 [Route(ComponentDefaults.DefaultRoute)]
 public class CatalogBffController : ControllerBase
 {
-    private readonly ILogger<CatalogBffController> _logger;
     private readonly ICatalogService _catalogService;
 
     public CatalogBffController(
         ILogger<CatalogBffController> logger,
         ICatalogService catalogService)
     {
-        _logger = logger;
         _catalogService = catalogService;
     }
 
@@ -90,6 +87,24 @@ public class CatalogBffController : ControllerBase
                 ResponseState = Enum.GetName(EntityModifyState.NotFound) !
             });
         }
+
+        return Ok(result);
+    }
+
+    [HttpPost]
+    [ProducesResponseType(typeof(GetBrandsResponse), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> GetBrandsAsync()
+    {
+        var result = await _catalogService.GetBrandsAsync();
+
+        return Ok(result);
+    }
+
+    [HttpPost]
+    [ProducesResponseType(typeof(GetTypesResponse), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> GetTypesAsync()
+    {
+        var result = await _catalogService.GetTypesAsync();
 
         return Ok(result);
     }
