@@ -9,14 +9,10 @@ namespace MicroservicesToDocker.Repositories;
 public class CatalogItemRepository : ICatalogItemRepository
 {
     private readonly ApplicationDbContext _dbContext;
-    private readonly ILogger<CatalogItemRepository> _logger;
 
-    public CatalogItemRepository(
-        IDbContextWrapper<ApplicationDbContext> dbContextWrapper,
-        ILogger<CatalogItemRepository> logger)
+    public CatalogItemRepository(IDbContextWrapper<ApplicationDbContext> dbContextWrapper)
     {
         _dbContext = dbContextWrapper.DbContext;
-        _logger = logger;
     }
 
     public async Task<PaginatedItems<CatalogItem>> GetByPageAsync(int pageIndex, int pageSize)
@@ -50,5 +46,49 @@ public class CatalogItemRepository : ICatalogItemRepository
         await _dbContext.SaveChangesAsync();
 
         return item.Entity.Id;
+    }
+
+    public async Task<EntityModifyState> Remove(int id)
+    {
+        bool exists = await _dbContext.CatalogItems.AnyAsync(ci => ci.Id == id);
+
+        if (!exists)
+        {
+            return EntityModifyState.NotFound;
+        }
+
+        var result = _dbContext.Remove(new CatalogItem { Id = id });
+        await _dbContext.SaveChangesAsync();
+
+        return EntityModifyState.Deleted;
+    }
+
+    public async Task<EntityModifyState> Update(int id, string name, string description, decimal price, int availableStock, int catalogBrandId, int catalogTypeId, string pictureFileName)
+    {
+        bool exists = await _dbContext.CatalogItems.AnyAsync(ci => ci.Id == id);
+
+        if (!exists)
+        {
+            return EntityModifyState.NotFound;
+        }
+
+        var result = _dbContext.CatalogItems.Update(new CatalogItem
+        {
+            CatalogBrandId = catalogBrandId,
+            CatalogTypeId = catalogTypeId,
+            Description = description,
+            Name = name,
+            PictureFileName = pictureFileName,
+            Price = price
+        });
+
+        if (result is null)
+        {
+            return EntityModifyState.NotUpdated;
+        }
+
+        await _dbContext.SaveChangesAsync();
+
+        return EntityModifyState.Updated;
     }
 }

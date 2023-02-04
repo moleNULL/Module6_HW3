@@ -1,6 +1,8 @@
 using MicroservicesToDocker.Data;
+using MicroservicesToDocker.Repositories;
 using MicroservicesToDocker.Repositories.Interfaces;
 using MicroservicesToDocker.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace MicroservicesToDocker.Services;
 
@@ -19,6 +21,19 @@ public class CatalogItemService : BaseDataService<ApplicationDbContext>, ICatalo
 
     public Task<int?> Add(string name, string description, decimal price, int availableStock, int catalogBrandId, int catalogTypeId, string pictureFileName)
     {
-        return ExecuteSafeAsync(() => _catalogItemRepository.Add(name, description, price, availableStock, catalogBrandId, catalogTypeId, pictureFileName));
+        return ExecuteSafeAsync(()
+            => _catalogItemRepository.Add(name, description, price, availableStock, catalogBrandId, catalogTypeId, pictureFileName));
+    }
+
+    public Task<EntityModifyState> Remove(int id)
+    {
+        return ExecuteSafeAsync(()
+            => _catalogItemRepository.Remove(id));
+    }
+
+    public Task<EntityModifyState> Update(int id, string name, string description, decimal price, int availableStock, int catalogBrandId, int catalogTypeId, string pictureFileName)
+    {
+        return ExecuteSafeAsync(()
+            => _catalogItemRepository.Update(id, name, description, price, availableStock, catalogBrandId, catalogTypeId, pictureFileName));
     }
 }
