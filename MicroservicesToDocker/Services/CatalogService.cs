@@ -1,6 +1,7 @@
 using AutoMapper;
 using MicroservicesToDocker.Configurations;
 using MicroservicesToDocker.Data;
+using MicroservicesToDocker.Data.Entities;
 using MicroservicesToDocker.Models.Dtos;
 using MicroservicesToDocker.Models.Response;
 using MicroservicesToDocker.Repositories.Interfaces;
@@ -36,6 +37,52 @@ public class CatalogService : BaseDataService<ApplicationDbContext>, ICatalogSer
                 PageIndex = pageIndex,
                 PageSize = pageSize
             };
+        });
+    }
+
+    public async Task<CatalogItemDto?> GetItemById(int id)
+    {
+        return await ExecuteSafeAsync(async () =>
+        {
+            var result = await _catalogItemRepository.GetByIdAsync(id);
+
+            var resultDto = _mapper.Map(result, typeof(CatalogItem), typeof(CatalogItemDto));
+
+            return (CatalogItemDto)resultDto;
+        });
+    }
+
+    public async Task<List<CatalogItemDto>?> GetItemsByBrand(string brand)
+    {
+        return await ExecuteSafeAsync(async () =>
+        {
+            var result = await _catalogItemRepository.GetByBrandAsync(brand);
+
+            if (result is null)
+            {
+                return null;
+            }
+
+            var resultDto = _mapper.Map(result, typeof(List<CatalogItem>), typeof(List<CatalogItemDto>));
+
+            return (List<CatalogItemDto>)resultDto;
+        });
+    }
+
+    public async Task<List<CatalogItemDto>?> GetItemsByTypeAsync(string type)
+    {
+        return await ExecuteSafeAsync(async () =>
+        {
+            var result = await _catalogItemRepository.GetByTypeAsync(type);
+
+            if (result is null)
+            {
+                return null;
+            }
+
+            var resultDto = _mapper.Map(result, typeof(List<CatalogItem>), typeof(List<CatalogItemDto>));
+
+            return (List<CatalogItemDto>)resultDto;
         });
     }
 }

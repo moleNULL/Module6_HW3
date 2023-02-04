@@ -2,6 +2,6 @@
 {
     public class RemoveBrandResponse<T>
     {
-        public T? RemoveState { get; set; }
+        public T RemoveState { get; set; } = default(T) !;
     }
 }

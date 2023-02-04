@@ -2,6 +2,6 @@
 {
     public class UpdateItemResponse<T>
     {
-        public T? UpdateState { get; set; }
+        public T UpdateState { get; set; } = default(T) !;
     }
 }

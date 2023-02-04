@@ -31,6 +31,61 @@ public class CatalogItemRepository : ICatalogItemRepository
         return new PaginatedItems<CatalogItem>() { TotalCount = totalItems, Data = itemsOnPage };
     }
 
+    public async Task<CatalogItem?> GetByIdAsync(int id)
+    {
+        CatalogItem? item = null;
+
+        try
+        {
+            item = await _dbContext.CatalogItems
+            .Include(ci => ci.CatalogBrand)
+            .Include(ci => ci.CatalogType)
+            .FirstAsync(ci => ci.Id == id);
+        }
+        catch (InvalidOperationException)
+        {
+            return null;
+        }
+
+        return item;
+    }
+
+    public async Task<List<CatalogItem>?> GetByBrandAsync(string brand)
+    {
+        bool exists = await _dbContext.CatalogBrands.AnyAsync(cb => cb.Brand == brand);
+
+        if (!exists)
+        {
+            return null;
+        }
+
+        var items = await _dbContext.CatalogItems
+            .Include(ci => ci.CatalogBrand)
+            .Include(ci => ci.CatalogType)
+            .Where(ci => ci.CatalogBrand.Brand == brand)
+            .ToListAsync();
+
+        return items;
+    }
+
+    public async Task<List<CatalogItem>?> GetByTypeAsync(string type)
+    {
+        bool exists = await _dbContext.CatalogTypes.AnyAsync(ct => ct.Type == type);
+
+        if (!exists)
+        {
+            return null;
+        }
+
+        var items = await _dbContext.CatalogItems
+            .Include(ci => ci.CatalogBrand)
+            .Include(ci => ci.CatalogType)
+            .Where(ci => ci.CatalogType.Type == type)
+            .ToListAsync();
+
+        return items;
+    }
+
     public async Task<int?> Add(string name, string description, decimal price, int availableStock, int catalogBrandId, int catalogTypeId, string pictureFileName)
     {
         var item = await _dbContext.AddAsync(new CatalogItem

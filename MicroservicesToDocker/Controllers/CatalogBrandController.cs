@@ -45,10 +45,10 @@ public class CatalogBrandController : ControllerBase
 
         if (result == Data.EntityModifyState.NotFound)
         {
-            return BadRequest(new RemoveBrandResponse<string>() { RemoveState = Enum.GetName(result) });
+            return BadRequest(new RemoveBrandResponse<string>() { RemoveState = Enum.GetName(result) ! });
         }
 
-        return Ok(new RemoveBrandResponse<string>() { RemoveState = Enum.GetName(result) });
+        return Ok(new RemoveBrandResponse<string>() { RemoveState = Enum.GetName(result) ! });
     }
 
     [HttpPost]
@@ -60,9 +60,9 @@ public class CatalogBrandController : ControllerBase
 
         if (result == EntityModifyState.NotFound || result == EntityModifyState.NotUpdated)
         {
-            return BadRequest(new UpdateBrandResponse<string>() { UpdateState = Enum.GetName(result) });
+            return BadRequest(new UpdateBrandResponse<string>() { UpdateState = Enum.GetName(result) ! });
         }
 
-        return Ok(new UpdateBrandResponse<string>() { UpdateState = Enum.GetName(result) });
+        return Ok(new UpdateBrandResponse<string>() { UpdateState = Enum.GetName(result) ! });
     }
 }

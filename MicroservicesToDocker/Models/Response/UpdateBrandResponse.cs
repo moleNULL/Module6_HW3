@@ -2,6 +2,6 @@
 {
     public class UpdateBrandResponse<T>
     {
-        public T? UpdateState { get; set; }
+        public T UpdateState { get; set; } = default(T) !;
     }
 }

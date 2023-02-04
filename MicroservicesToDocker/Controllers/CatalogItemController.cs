@@ -48,10 +48,10 @@ public class CatalogItemController : ControllerBase
 
         if (result == EntityModifyState.NotFound)
         {
-            return BadRequest(new RemoveItemResponse<string>() { RemoveState = Enum.GetName(result) });
+            return BadRequest(new RemoveItemResponse<string>() { RemoveState = Enum.GetName(result) ! });
         }
 
-        return Ok(new RemoveItemResponse<string>() { RemoveState = Enum.GetName(result) });
+        return Ok(new RemoveItemResponse<string>() { RemoveState = Enum.GetName(result) ! });
     }
 
     [HttpPost]
@@ -63,9 +63,9 @@ public class CatalogItemController : ControllerBase
 
         if (result == EntityModifyState.NotFound || result == EntityModifyState.NotUpdated)
         {
-            return BadRequest(new UpdateItemResponse<string>() { UpdateState = Enum.GetName(result) });
+            return BadRequest(new UpdateItemResponse<string>() { UpdateState = Enum.GetName(result) ! });
         }
 
-        return Ok(new UpdateItemResponse<string>() { UpdateState = Enum.GetName(result) });
+        return Ok(new UpdateItemResponse<string>() { UpdateState = Enum.GetName(result) ! });
     }
 }
