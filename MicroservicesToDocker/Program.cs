@@ -1,3 +1,12 @@
+/*
+                                                   Задача
+                                Практикуватися і розібратися на основі прикладу
+
+● У CatalogBff додати методи GetById, GetByBrand, GetByType, GetBrands, GetTypes
+● Дописати Controller: CatalogItem, CatalogBrand, CatalogType методами додавання, видалення, оновлення
+
+ */
+
 using MicroservicesToDocker.Configurations;
 using MicroservicesToDocker.Data;
 using MicroservicesToDocker.Repositories.Implementations;
