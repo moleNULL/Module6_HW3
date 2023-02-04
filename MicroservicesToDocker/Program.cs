@@ -1,25 +1,85 @@
-namespace MicroservicesToDocker
+/*
+                                                   Задача
+                                Практикуватися і розібратися на основі прикладу
+
+● У CatalogBff додати методи GetById, GetByBrand, GetByType, GetBrands, GetTypes
+● Дописати Controller: CatalogItem, CatalogBrand, CatalogType методами додавання, видалення, оновлення
+
+ */
+
+using MicroservicesToDocker.Configurations;
+using MicroservicesToDocker.Data;
+using MicroservicesToDocker.Repositories.Implementations;
+using MicroservicesToDocker.Repositories.Interfaces;
+using MicroservicesToDocker.Services.Implementations;
+using MicroservicesToDocker.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
+
+public class Program
 {
-    public class Program
+    public static async Task Main(string[] args)
     {
-        public static void Main(string[] args)
+        var configuration = GetConfiguration();
+
+        var builder = WebApplication.CreateBuilder(args);
+        builder.Services.AddControllers();
+        builder.Services.Configure<CatalogConfig>(configuration);
+        builder.Services.AddSwaggerGen();
+        builder.Services.AddAutoMapper(typeof(Program));
+
+        builder.Services.AddTransient<ICatalogItemRepository, CatalogItemRepository>();
+        builder.Services.AddTransient<ICatalogBrandRepository, CatalogBrandRepository>();
+        builder.Services.AddTransient<ICatalogTypeRepository, CatalogTypeRepository>();
+
+        builder.Services.AddTransient<ICatalogService, CatalogService>();
+        builder.Services.AddTransient<ICatalogItemService, CatalogItemService>();
+        builder.Services.AddTransient<ICatalogBrandService, CatalogBrandService>();
+        builder.Services.AddTransient<ICatalogTypeService, CatalogTypeService>();
+
+        builder.Services.AddDbContextFactory<ApplicationDbContext>(opts => opts.UseNpgsql(configuration["ConnectionString"]));
+        builder.Services.AddScoped<IDbContextWrapper<ApplicationDbContext>, DbContextWrapper<ApplicationDbContext>>();
+
+        var app = builder.Build();
+
+        app.UseSwagger();
+        app.UseSwaggerUI();
+        app.UseRouting();
+        app.UseEndpoints(endpoints =>
         {
-            var builder = WebApplication.CreateBuilder(args);
+            endpoints.MapDefaultControllerRoute();
+            endpoints.MapControllers();
+        });
 
-            // Add services to the container.
+        await CreateDbIfNotExistsAsync(app);
+        app.Run();
+    }
 
-            builder.Services.AddControllers();
+    private static IConfiguration GetConfiguration()
+    {
+        var builder = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .AddEnvironmentVariables();
 
-            var app = builder.Build();
+        return builder.Build();
+    }
 
-            // Configure the HTTP request pipeline.
+    private static async Task CreateDbIfNotExistsAsync(IHost host)
+    {
+        using (var scope = host.Services.CreateScope())
+        {
+            var services = scope.ServiceProvider;
+            try
+            {
+                var context = services.GetRequiredService<ApplicationDbContext>();
 
-            app.UseAuthorization();
-
-
-            app.MapControllers();
-
-            app.Run();
+                await DbInitializer.InitializeAsync(context);
+            }
+            catch (Exception ex)
+            {
+                var logger = services.GetRequiredService<ILogger<Program>>();
+                logger.LogError(ex, "An error occurred while creating the DB");
+            }
         }
     }
 }
