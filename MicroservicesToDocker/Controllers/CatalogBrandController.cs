@@ -1,10 +1,10 @@
 using System.Net;
 using Infrastructure;
-using MicroservicesToDocker.Models.Requests;
-using MicroservicesToDocker.Models.Response;
 using MicroservicesToDocker.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using MicroservicesToDocker.Data;
+using MicroservicesToDocker.Models.Requests.BrandRequests;
+using MicroservicesToDocker.Models.Response.BrandResponses;
 
 namespace MicroservicesToDocker.Controllers;
 

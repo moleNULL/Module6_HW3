@@ -6,6 +6,8 @@ using MicroservicesToDocker.Services.Interfaces;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using MicroservicesToDocker.Data;
+using MicroservicesToDocker.Models.Requests.GetItemByRequests;
+using MicroservicesToDocker.Models.Response.GetResponses;
 
 namespace MicroservicesToDocker.Controllers;
 
