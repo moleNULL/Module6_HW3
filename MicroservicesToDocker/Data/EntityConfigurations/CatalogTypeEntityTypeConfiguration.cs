@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace MicroservicesToDocker.Data.EntityConfigurations;
 
 public class CatalogTypeEntityTypeConfiguration
-    : IEntityTypeConfiguration<CatalogType>
+    : IEntityTypeConfiguration<CatalogTypeEntity>
 {
-    public void Configure(EntityTypeBuilder<CatalogType> builder)
+    public void Configure(EntityTypeBuilder<CatalogTypeEntity> builder)
     {
         builder.ToTable("CatalogType");
 

@@ -12,9 +12,9 @@ public class ApplicationDbContext : DbContext
     {
     }
 
-    public DbSet<CatalogItem> CatalogItems { get; set; }
-    public DbSet<CatalogBrand> CatalogBrands { get; set; }
-    public DbSet<CatalogType> CatalogTypes { get; set; }
+    public DbSet<CatalogItemEntity> CatalogItems { get; set; }
+    public DbSet<CatalogBrandEntity> CatalogBrands { get; set; }
+    public DbSet<CatalogTypeEntity> CatalogTypes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

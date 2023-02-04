@@ -24,9 +24,9 @@ public class CatalogBrandController : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(AddBrandResponse<int?>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(AddBrandResponse<int?>), (int)HttpStatusCode.BadRequest)]
-    public async Task<IActionResult> Add(CreateBrandRequest request)
+    public async Task<IActionResult> AddAsync(CreateBrandRequest request)
     {
-        var result = await _catalogBrandService.Add(request.Brand);
+        var result = await _catalogBrandService.AddAsync(request.Brand);
 
         if (result is null)
         {
@@ -39,9 +39,9 @@ public class CatalogBrandController : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(RemoveBrandResponse<string>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(RemoveBrandResponse<string>), (int)HttpStatusCode.BadRequest)]
-    public async Task<IActionResult> Remove(RemoveBrandRequest request)
+    public async Task<IActionResult> RemoveAsync(RemoveBrandRequest request)
     {
-        var result = await _catalogBrandService.Remove(request.Id);
+        var result = await _catalogBrandService.RemoveAsync(request.Id);
 
         if (result == Data.EntityModifyState.NotFound)
         {
@@ -54,9 +54,9 @@ public class CatalogBrandController : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(UpdateBrandResponse<string>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(UpdateBrandResponse<string>), (int)HttpStatusCode.BadRequest)]
-    public async Task<IActionResult> Update(UpdateBrandRequest request)
+    public async Task<IActionResult> UpdateAsync(UpdateBrandRequest request)
     {
-        var result = await _catalogBrandService.Update(request.Id, request.Brand);
+        var result = await _catalogBrandService.UpdateAsync(request.Id, request.Brand);
 
         if (result == EntityModifyState.NotFound || result == EntityModifyState.NotUpdated)
         {

@@ -6,7 +6,7 @@ using Microsoft.Extensions.Options;
 
 namespace MicroservicesToDocker.Mapping;
 
-public class CatalogItemPictureResolver : IMemberValueResolver<CatalogItem, CatalogItemDto, string, object>
+public class CatalogItemPictureResolver : IMemberValueResolver<CatalogItemEntity, CatalogItemDto, string, object>
 {
     private readonly CatalogConfig _config;
 
@@ -15,7 +15,7 @@ public class CatalogItemPictureResolver : IMemberValueResolver<CatalogItem, Cata
         _config = config.Value;
     }
 
-    public object Resolve(CatalogItem source, CatalogItemDto destination, string sourceMember, object destMember, ResolutionContext context)
+    public object Resolve(CatalogItemEntity source, CatalogItemDto destination, string sourceMember, object destMember, ResolutionContext context)
     {
         return $"{_config.Host}/{_config.ImgUrl}/{sourceMember}";
     }

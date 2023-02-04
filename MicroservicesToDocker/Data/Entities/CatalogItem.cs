@@ -2,7 +2,7 @@
 
 namespace MicroservicesToDocker.Data.Entities;
 
-public class CatalogItem
+public class CatalogItemEntity
 {
     public int Id { get; set; }
 
@@ -16,11 +16,11 @@ public class CatalogItem
 
     public int CatalogTypeId { get; set; }
 
-    public CatalogType CatalogType { get; set; }
+    public CatalogTypeEntity CatalogType { get; set; }
 
     public int CatalogBrandId { get; set; }
 
-    public CatalogBrand CatalogBrand { get; set; }
+    public CatalogBrandEntity CatalogBrand { get; set; }
 
     public int AvailableStock { get; set; }
 }

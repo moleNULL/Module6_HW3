@@ -1,7 +1,7 @@
 #pragma warning disable CS8618
 namespace MicroservicesToDocker.Data.Entities;
 
-public class CatalogType
+public class CatalogTypeEntity
 {
     public int Id { get; set; }
 

@@ -36,7 +36,7 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllers();
 });
 
-CreateDbIfNotExists(app);
+await CreateDbIfNotExistsAsync(app);
 app.Run();
 
 IConfiguration GetConfiguration()
@@ -49,7 +49,7 @@ IConfiguration GetConfiguration()
     return builder.Build();
 }
 
-void CreateDbIfNotExists(IHost host)
+async Task CreateDbIfNotExistsAsync(IHost host)
 {
     using (var scope = host.Services.CreateScope())
     {
@@ -58,7 +58,7 @@ void CreateDbIfNotExists(IHost host)
         {
             var context = services.GetRequiredService<ApplicationDbContext>();
 
-            DbInitializer.Initialize(context).Wait();
+            await DbInitializer.InitializeAsync(context);
         }
         catch (Exception ex)
         {

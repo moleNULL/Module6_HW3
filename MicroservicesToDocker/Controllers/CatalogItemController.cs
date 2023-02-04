@@ -13,23 +13,21 @@ namespace MicroservicesToDocker.Controllers;
 [Route(ComponentDefaults.DefaultRoute)]
 public class CatalogItemController : ControllerBase
 {
-    private readonly ILogger<CatalogItemController> _logger;
     private readonly ICatalogItemService _catalogItemService;
 
     public CatalogItemController(
         ILogger<CatalogItemController> logger,
         ICatalogItemService catalogItemService)
     {
-        _logger = logger;
         _catalogItemService = catalogItemService;
     }
 
     [HttpPost]
     [ProducesResponseType(typeof(AddItemResponse<int?>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(AddItemResponse<int?>), (int)HttpStatusCode.BadRequest)]
-    public async Task<IActionResult> Add(CreateProductRequest request)
+    public async Task<IActionResult> AddAsync(CreateProductRequest request)
     {
-        var result = await _catalogItemService.Add(request.Name, request.Description, request.Price, request.AvailableStock, request.CatalogBrandId, request.CatalogTypeId, request.PictureFileName);
+        var result = await _catalogItemService.AddAsync(request.Name, request.Description, request.Price, request.AvailableStock, request.CatalogBrandId, request.CatalogTypeId, request.PictureFileName);
 
         if (result is null)
         {
@@ -42,9 +40,9 @@ public class CatalogItemController : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(RemoveItemResponse<string>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(RemoveItemResponse<string>), (int)HttpStatusCode.BadRequest)]
-    public async Task<IActionResult> Remove(RemoveProductRequest request)
+    public async Task<IActionResult> RemoveAsync(RemoveProductRequest request)
     {
-        var result = await _catalogItemService.Remove(request.Id);
+        var result = await _catalogItemService.RemoveAsync(request.Id);
 
         if (result == EntityModifyState.NotFound)
         {
@@ -57,9 +55,9 @@ public class CatalogItemController : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(EntityModifyState), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
-    public async Task<IActionResult> Update(UpdateProductRequest request)
+    public async Task<IActionResult> UpdateAsync(UpdateProductRequest request)
     {
-        var result = await _catalogItemService.Update(request.Id, request.Name, request.Description, request.Price, request.AvailableStock, request.CatalogBrandId, request.CatalogTypeId, request.PictureFileName);
+        var result = await _catalogItemService.UpdateAsync(request.Id, request.Name, request.Description, request.Price, request.AvailableStock, request.CatalogBrandId, request.CatalogTypeId, request.PictureFileName);
 
         if (result == EntityModifyState.NotFound || result == EntityModifyState.NotUpdated)
         {

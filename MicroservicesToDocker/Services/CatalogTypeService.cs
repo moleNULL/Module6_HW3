@@ -17,22 +17,22 @@ namespace MicroservicesToDocker.Services
             _catalogTypeRepository = catalogTypeRepository;
         }
 
-        public Task<int?> Add(string type)
+        public Task<int?> AddAsync(string type)
         {
             return ExecuteSafeAsync(()
-                => _catalogTypeRepository.Add(type));
+                => _catalogTypeRepository.AddAsync(type));
         }
 
-        public Task<EntityModifyState> Remove(int id)
+        public Task<EntityModifyState> RemoveAsync(int id)
         {
             return ExecuteSafeAsync(()
-                => _catalogTypeRepository.Remove(id));
+                => _catalogTypeRepository.RemoveAsync(id));
         }
 
-        public Task<EntityModifyState> Update(int id, string type)
+        public Task<EntityModifyState> UpdateAsync(int id, string type)
         {
             return ExecuteSafeAsync(()
-                => _catalogTypeRepository.Update(id, type));
+                => _catalogTypeRepository.UpdateAsync(id, type));
         }
     }
 }

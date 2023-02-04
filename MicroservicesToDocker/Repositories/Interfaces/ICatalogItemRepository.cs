@@ -6,13 +6,13 @@ namespace MicroservicesToDocker.Repositories.Interfaces;
 
 public interface ICatalogItemRepository
 {
-    Task<PaginatedItems<CatalogItem>> GetByPageAsync(int pageIndex, int pageSize);
-    Task<CatalogItem?> GetByIdAsync(int id);
-    Task<List<CatalogItem>?> GetByBrandAsync(string brand);
-    Task<List<CatalogItem>?> GetByTypeAsync(string type);
-    Task<List<CatalogBrand>> GetBrandsAsync();
-    Task<List<CatalogType>> GetTypesAsync();
-    Task<int?> Add(string name, string description, decimal price, int availableStock, int catalogBrandId, int catalogTypeId, string pictureFileName);
-    Task<EntityModifyState> Remove(int id);
-    Task<EntityModifyState> Update(int id, string name, string description, decimal price, int availableStock, int catalogBrandId, int catalogTypeId, string pictureFileName);
+    Task<PaginatedItems<CatalogItemEntity>> GetByPageAsync(int pageIndex, int pageSize);
+    Task<CatalogItemEntity?> GetByIdAsync(int id);
+    Task<List<CatalogItemEntity>?> GetByBrandAsync(string brand);
+    Task<List<CatalogItemEntity>?> GetByTypeAsync(string type);
+    Task<List<CatalogBrandEntity>> GetBrandsAsync();
+    Task<List<CatalogTypeEntity>> GetTypesAsync();
+    Task<int?> AddAsync(string name, string description, decimal price, int availableStock, int catalogBrandId, int catalogTypeId, string pictureFileName);
+    Task<EntityModifyState> RemoveAsync(int id);
+    Task<EntityModifyState> UpdateAsync(int id, string name, string description, decimal price, int availableStock, int catalogBrandId, int catalogTypeId, string pictureFileName);
 }

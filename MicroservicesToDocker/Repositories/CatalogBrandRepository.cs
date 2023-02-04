@@ -15,9 +15,9 @@ namespace MicroservicesToDocker.Repositories
             _dbContext = dbContextWrapper.DbContext;
         }
 
-        public async Task<int?> Add(string brand)
+        public async Task<int?> AddAsync(string brand)
         {
-            var item = await _dbContext.CatalogBrands.AddAsync(new CatalogBrand
+            var item = await _dbContext.CatalogBrands.AddAsync(new CatalogBrandEntity
             {
                 Brand = brand
             });
@@ -27,7 +27,7 @@ namespace MicroservicesToDocker.Repositories
             return item.Entity.Id;
         }
 
-        public async Task<EntityModifyState> Remove(int id)
+        public async Task<EntityModifyState> RemoveAsync(int id)
         {
             bool exists = await _dbContext.CatalogBrands.AnyAsync(cb => cb.Id == id);
 
@@ -36,13 +36,13 @@ namespace MicroservicesToDocker.Repositories
                 return EntityModifyState.NotFound;
             }
 
-            var result = _dbContext.CatalogBrands.Remove(new CatalogBrand { Id = id });
+            var result = _dbContext.CatalogBrands.Remove(new CatalogBrandEntity { Id = id });
             await _dbContext.SaveChangesAsync();
 
             return EntityModifyState.Deleted;
         }
 
-        public async Task<EntityModifyState> Update(int id, string brand)
+        public async Task<EntityModifyState> UpdateAsync(int id, string brand)
         {
             bool exists = await _dbContext.CatalogBrands.AnyAsync(cb => cb.Id == id);
 
@@ -51,7 +51,7 @@ namespace MicroservicesToDocker.Repositories
                 return EntityModifyState.NotFound;
             }
 
-            var result = _dbContext.CatalogBrands.Update(new CatalogBrand { Id = id, Brand = brand });
+            var result = _dbContext.CatalogBrands.Update(new CatalogBrandEntity { Id = id, Brand = brand });
 
             if (result is null)
             {

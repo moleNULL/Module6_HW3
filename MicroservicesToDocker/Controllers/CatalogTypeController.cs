@@ -24,9 +24,9 @@ public class CatalogTypeController : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(AddTypeResponse<int?>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(AddTypeResponse<int?>), (int)HttpStatusCode.BadRequest)]
-    public async Task<IActionResult> Add(CreateTypeRequest request)
+    public async Task<IActionResult> AddAsync(CreateTypeRequest request)
     {
-        var result = await _catalogTypeService.Add(request.Type);
+        var result = await _catalogTypeService.AddAsync(request.Type);
 
         if (result is null)
         {
@@ -39,9 +39,9 @@ public class CatalogTypeController : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(RemoveTypeResponse<string>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(RemoveTypeResponse<string>), (int)HttpStatusCode.BadRequest)]
-    public async Task<IActionResult> Remove(RemoveTypeRequest request)
+    public async Task<IActionResult> RemoveAsync(RemoveTypeRequest request)
     {
-        var result = await _catalogTypeService.Remove(request.Id);
+        var result = await _catalogTypeService.RemoveAsync(request.Id);
 
         if (result == EntityModifyState.NotFound)
         {
@@ -54,9 +54,9 @@ public class CatalogTypeController : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(UpdateTypeResponse<string>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(UpdateTypeResponse<string>), (int)HttpStatusCode.BadRequest)]
-    public async Task<IActionResult> Update(UpdateTypeRequest request)
+    public async Task<IActionResult> UpdateAsync(UpdateTypeRequest request)
     {
-        var result = await _catalogTypeService.Update(request.Id, request.Type);
+        var result = await _catalogTypeService.UpdateAsync(request.Id, request.Type);
 
         if (result == EntityModifyState.NotFound || result == EntityModifyState.NotUpdated)
         {

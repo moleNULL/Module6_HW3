@@ -15,7 +15,7 @@ public class CatalogItemRepository : ICatalogItemRepository
         _dbContext = dbContextWrapper.DbContext;
     }
 
-    public async Task<PaginatedItems<CatalogItem>> GetByPageAsync(int pageIndex, int pageSize)
+    public async Task<PaginatedItems<CatalogItemEntity>> GetByPageAsync(int pageIndex, int pageSize)
     {
         var totalItems = await _dbContext.CatalogItems
             .LongCountAsync();
@@ -28,12 +28,12 @@ public class CatalogItemRepository : ICatalogItemRepository
             .Take(pageSize)
             .ToListAsync();
 
-        return new PaginatedItems<CatalogItem>() { TotalCount = totalItems, Data = itemsOnPage };
+        return new PaginatedItems<CatalogItemEntity>() { TotalCount = totalItems, Data = itemsOnPage };
     }
 
-    public async Task<CatalogItem?> GetByIdAsync(int id)
+    public async Task<CatalogItemEntity?> GetByIdAsync(int id)
     {
-        CatalogItem? item = null;
+        CatalogItemEntity? item = null;
 
         try
         {
@@ -50,7 +50,7 @@ public class CatalogItemRepository : ICatalogItemRepository
         return item;
     }
 
-    public async Task<List<CatalogItem>?> GetByBrandAsync(string brand)
+    public async Task<List<CatalogItemEntity>?> GetByBrandAsync(string brand)
     {
         bool exists = await _dbContext.CatalogBrands.AnyAsync(cb => cb.Brand == brand);
 
@@ -68,7 +68,7 @@ public class CatalogItemRepository : ICatalogItemRepository
         return items;
     }
 
-    public async Task<List<CatalogItem>?> GetByTypeAsync(string type)
+    public async Task<List<CatalogItemEntity>?> GetByTypeAsync(string type)
     {
         bool exists = await _dbContext.CatalogTypes.AnyAsync(ct => ct.Type == type);
 
@@ -86,23 +86,23 @@ public class CatalogItemRepository : ICatalogItemRepository
         return items;
     }
 
-    public async Task<List<CatalogBrand>> GetBrandsAsync()
+    public async Task<List<CatalogBrandEntity>> GetBrandsAsync()
     {
         var brands = await _dbContext.CatalogBrands.ToListAsync();
 
         return brands;
     }
 
-    public async Task<List<CatalogType>> GetTypesAsync()
+    public async Task<List<CatalogTypeEntity>> GetTypesAsync()
     {
         var types = await _dbContext.CatalogTypes.ToListAsync();
 
         return types;
     }
 
-    public async Task<int?> Add(string name, string description, decimal price, int availableStock, int catalogBrandId, int catalogTypeId, string pictureFileName)
+    public async Task<int?> AddAsync(string name, string description, decimal price, int availableStock, int catalogBrandId, int catalogTypeId, string pictureFileName)
     {
-        var item = await _dbContext.AddAsync(new CatalogItem
+        var item = await _dbContext.AddAsync(new CatalogItemEntity
         {
             CatalogBrandId = catalogBrandId,
             CatalogTypeId = catalogTypeId,
@@ -117,7 +117,7 @@ public class CatalogItemRepository : ICatalogItemRepository
         return item.Entity.Id;
     }
 
-    public async Task<EntityModifyState> Remove(int id)
+    public async Task<EntityModifyState> RemoveAsync(int id)
     {
         bool exists = await _dbContext.CatalogItems.AnyAsync(ci => ci.Id == id);
 
@@ -126,13 +126,13 @@ public class CatalogItemRepository : ICatalogItemRepository
             return EntityModifyState.NotFound;
         }
 
-        var result = _dbContext.Remove(new CatalogItem { Id = id });
+        var result = _dbContext.Remove(new CatalogItemEntity { Id = id });
         await _dbContext.SaveChangesAsync();
 
         return EntityModifyState.Deleted;
     }
 
-    public async Task<EntityModifyState> Update(int id, string name, string description, decimal price, int availableStock, int catalogBrandId, int catalogTypeId, string pictureFileName)
+    public async Task<EntityModifyState> UpdateAsync(int id, string name, string description, decimal price, int availableStock, int catalogBrandId, int catalogTypeId, string pictureFileName)
     {
         bool exists = await _dbContext.CatalogItems.AnyAsync(ci => ci.Id == id);
 
@@ -141,7 +141,7 @@ public class CatalogItemRepository : ICatalogItemRepository
             return EntityModifyState.NotFound;
         }
 
-        var result = _dbContext.CatalogItems.Update(new CatalogItem
+        var result = _dbContext.CatalogItems.Update(new CatalogItemEntity
         {
             CatalogBrandId = catalogBrandId,
             CatalogTypeId = catalogTypeId,

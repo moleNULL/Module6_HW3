@@ -25,7 +25,7 @@ public class CatalogBffController : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(PaginatedItemsResponse<CatalogItemDto>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(PaginatedItemsResponse<CatalogItemDto>), (int)HttpStatusCode.BadRequest)]
-    public async Task<IActionResult> Items(PaginatedItemsRequest request)
+    public async Task<IActionResult> ItemsAsync(PaginatedItemsRequest request)
     {
         var result = await _catalogService.GetCatalogItemsAsync(request.PageSize, request.PageIndex);
 
@@ -40,9 +40,9 @@ public class CatalogBffController : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(GetItemByResponse), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(GetItemBadRequestResponse<string>), (int)HttpStatusCode.BadRequest)]
-    public async Task<IActionResult> GetItemById(GetItemByIdRequest request)
+    public async Task<IActionResult> GetItemByIdAsync(GetItemByIdRequest request)
     {
-        var result = await _catalogService.GetItemById(request.Id);
+        var result = await _catalogService.GetItemByIdAsync(request.Id);
 
         if (result is null)
         {
@@ -58,9 +58,9 @@ public class CatalogBffController : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(GetItemByResponse), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(GetItemBadRequestResponse<string>), (int)HttpStatusCode.BadRequest)]
-    public async Task<IActionResult> GetItemByBrand(GetItemByBrandRequest request)
+    public async Task<IActionResult> GetItemByBrandAsync(GetItemByBrandRequest request)
     {
-        var result = await _catalogService.GetItemsByBrand(request.Brand);
+        var result = await _catalogService.GetItemsByBrandAsync(request.Brand);
 
         if (result is null)
         {
@@ -76,7 +76,7 @@ public class CatalogBffController : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(GetItemByResponse), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(GetItemBadRequestResponse<string>), (int)HttpStatusCode.BadRequest)]
-    public async Task<IActionResult> GetItemByType(GetItemByTypeRequest request)
+    public async Task<IActionResult> GetItemByTypeAsync(GetItemByTypeRequest request)
     {
         var result = await _catalogService.GetItemsByTypeAsync(request.Type);
 

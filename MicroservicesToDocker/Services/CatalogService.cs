@@ -40,19 +40,19 @@ public class CatalogService : BaseDataService<ApplicationDbContext>, ICatalogSer
         });
     }
 
-    public async Task<CatalogItemDto?> GetItemById(int id)
+    public async Task<CatalogItemDto?> GetItemByIdAsync(int id)
     {
         return await ExecuteSafeAsync(async () =>
         {
             var result = await _catalogItemRepository.GetByIdAsync(id);
 
-            var resultDto = _mapper.Map(result, typeof(CatalogItem), typeof(CatalogItemDto));
+            var resultDto = _mapper.Map(result, typeof(CatalogItemEntity), typeof(CatalogItemDto));
 
             return (CatalogItemDto)resultDto;
         });
     }
 
-    public async Task<List<CatalogItemDto>?> GetItemsByBrand(string brand)
+    public async Task<List<CatalogItemDto>?> GetItemsByBrandAsync(string brand)
     {
         return await ExecuteSafeAsync(async () =>
         {
@@ -63,7 +63,7 @@ public class CatalogService : BaseDataService<ApplicationDbContext>, ICatalogSer
                 return null;
             }
 
-            var resultDto = _mapper.Map(result, typeof(List<CatalogItem>), typeof(List<CatalogItemDto>));
+            var resultDto = _mapper.Map(result, typeof(List<CatalogItemEntity>), typeof(List<CatalogItemDto>));
 
             return (List<CatalogItemDto>)resultDto;
         });
@@ -80,7 +80,7 @@ public class CatalogService : BaseDataService<ApplicationDbContext>, ICatalogSer
                 return null;
             }
 
-            var resultDto = _mapper.Map(result, typeof(List<CatalogItem>), typeof(List<CatalogItemDto>));
+            var resultDto = _mapper.Map(result, typeof(List<CatalogItemEntity>), typeof(List<CatalogItemDto>));
 
             return (List<CatalogItemDto>)resultDto;
         });
@@ -92,7 +92,7 @@ public class CatalogService : BaseDataService<ApplicationDbContext>, ICatalogSer
         {
             var result = await _catalogItemRepository.GetBrandsAsync();
 
-            var resultDto = _mapper.Map(result, typeof(List<CatalogBrand>), typeof(List<CatalogBrandDto>));
+            var resultDto = _mapper.Map(result, typeof(List<CatalogBrandEntity>), typeof(List<CatalogBrandDto>));
 
             return (List<CatalogBrandDto>)resultDto;
         });
@@ -104,7 +104,7 @@ public class CatalogService : BaseDataService<ApplicationDbContext>, ICatalogSer
         {
             var result = await _catalogItemRepository.GetTypesAsync();
 
-            var resultDto = _mapper.Map(result, typeof(List<CatalogType>), typeof(List<CatalogTypeDto>));
+            var resultDto = _mapper.Map(result, typeof(List<CatalogTypeEntity>), typeof(List<CatalogTypeDto>));
 
             return (List<CatalogTypeDto>)resultDto;
         });

@@ -19,21 +19,21 @@ public class CatalogItemService : BaseDataService<ApplicationDbContext>, ICatalo
         _catalogItemRepository = catalogItemRepository;
     }
 
-    public Task<int?> Add(string name, string description, decimal price, int availableStock, int catalogBrandId, int catalogTypeId, string pictureFileName)
+    public Task<int?> AddAsync(string name, string description, decimal price, int availableStock, int catalogBrandId, int catalogTypeId, string pictureFileName)
     {
         return ExecuteSafeAsync(()
-            => _catalogItemRepository.Add(name, description, price, availableStock, catalogBrandId, catalogTypeId, pictureFileName));
+            => _catalogItemRepository.AddAsync(name, description, price, availableStock, catalogBrandId, catalogTypeId, pictureFileName));
     }
 
-    public Task<EntityModifyState> Remove(int id)
+    public Task<EntityModifyState> RemoveAsync(int id)
     {
         return ExecuteSafeAsync(()
-            => _catalogItemRepository.Remove(id));
+            => _catalogItemRepository.RemoveAsync(id));
     }
 
-    public Task<EntityModifyState> Update(int id, string name, string description, decimal price, int availableStock, int catalogBrandId, int catalogTypeId, string pictureFileName)
+    public Task<EntityModifyState> UpdateAsync(int id, string name, string description, decimal price, int availableStock, int catalogBrandId, int catalogTypeId, string pictureFileName)
     {
         return ExecuteSafeAsync(()
-            => _catalogItemRepository.Update(id, name, description, price, availableStock, catalogBrandId, catalogTypeId, pictureFileName));
+            => _catalogItemRepository.UpdateAsync(id, name, description, price, availableStock, catalogBrandId, catalogTypeId, pictureFileName));
     }
 }
